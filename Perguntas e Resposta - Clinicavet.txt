@@ -1,0 +1,46 @@
+Qual comando seleciona todos os dados de animais, cujos nomes terminem com "mon"?
+
+SELECT * FROM animals WHERE name LIKE '%mon';
+
+Qual comando seleciona nome e tentativas de fugas de animais, cujo peso seja maior que 10,5kg?
+
+SELECT name, escape_attempts FROM animals WHERE weight_kg > 10.5;
+
+Qual comando seleciona a quantidade total de animais.
+
+SELECT COUNT(*) as total_animais FROM animals;
+
+Qual comando seleciona a soma total dos pesos de todos os animais?
+
+SELECT SUM(weight_kg) as total_pesos FROM animals;
+
+Como selecionar o nome do animal e o nome do dono de todos os registros das tabelas 'animals' e 'owners' onde o animal pertence ao dono?
+
+SELECT a.name as animal_name, o.full_name as owner_name
+FROM animals a
+INNER JOIN owners o ON a.owner_id = o.ID;
+
+Como obter o número total de tentativas de fuga por espécie na tabela 'animals'?
+
+SELECT species.name as species_name, SUM(animals.escape_attempts) as total_escape_attempts
+FROM animals
+JOIN species ON animals.species_id = species.ID
+GROUP BY species.name;
+
+Como selecionar todos os donos de animais na tabela 'owners', ordenados por idade decrescente?
+
+SELECT * FROM owners
+ORDER BY age DESC;
+
+Qual consulta retorna a quantidade total de animais por espécie, em ordem decrescente, com base na quantidade de animais de cada espécie?
+
+SELECT species.name as species_name, COUNT(animals.ID) as total_animais
+FROM animals
+JOIN species ON animals.species_id = species.ID
+GROUP BY species.name
+ORDER BY total_animais DESC;
+
+Como selecionar apenas o nome e a idade dos donos de animais na tabela 'owners'?
+
+SELECT full_name as owner_name, age FROM owners;
+
